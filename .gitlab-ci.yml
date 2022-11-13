@@ -4,8 +4,7 @@ image: node:14-alpine
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - client/node_modules/
-    - server/node_modules/
+    - node_modules/
 
 stages:
   - build
@@ -17,7 +16,6 @@ build:
   tags:
     - docker
   script:
-    - cd server
     - npm install
     - npm build
 
@@ -31,7 +29,6 @@ test:
   variables:
     MONGODB_URI: "mongodb://mongo:27017/serverTestDB"
   script:
-    - cd server
     - npm run ci-test
 
 deploy:
