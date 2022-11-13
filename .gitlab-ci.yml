@@ -29,7 +29,7 @@ test:
   variables:
     MONGODB_URI: "mongodb://mongo:27017/serverTestDB"
   script:
-    - npm run ci-test
+    - npm run test:unit
 
 deploy:
   stage: deploy
