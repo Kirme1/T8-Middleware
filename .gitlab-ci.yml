@@ -4,6 +4,7 @@ image: node:14-alpine
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
+    - client/node_modules/
     - server/node_modules/
 
 stages:
@@ -18,6 +19,7 @@ build:
   script:
     - cd server
     - npm install
+    - npm build
 
 test:
   stage: test
