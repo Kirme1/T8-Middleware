@@ -28,6 +28,8 @@ test:
       alias: mongo
   variables:
     MONGODB_URI: "mongodb://mongo:27017/serverTestDB"
+  script:
+      - echo "----- Test Running -----"
   
     
 
