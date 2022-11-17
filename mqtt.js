@@ -1,34 +1,42 @@
-const mqtt = require('mqtt')
-const port = '1883'
-const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
-const options = {
-  // Clean session
-  clean: true,
-  connectTimeout: 4000,
- 
-}
-const connectUrl = `mqtt://localhost:${port}`
+const WebSocket = require("ws")
+const mqtt = require("mqtt")
+const client = mqtt.connect("mqtt://localhost:1883/")
 
-const client = mqtt.connect(connectUrl, {
-  clientId,
-  clean: true,
-  connectTimeout: 4000,
-  username: 'emqx',
-  password: 'public',
-  reconnectPeriod: 1000,
-})
-const topic = '/nodejs/mqtt'
-client.on('connect', () => {
-  console.log('Connected')
-  client.subscribe([topic], () => {
-    console.log(`Subscribe to topic '${topic}'`)
-  })
-  client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
-    if (error) {
-      console.error(error)
+const wss = new WebSocket.Server({ port: 8082 })
+
+let count = 0
+setInterval(() => {
+    count = 0
+}, 1000);
+console.log("connected")
+
+wss.on("connection", ws => {
+    if (count < 10) {
+        ws.on("message", mes => {
+            try {
+                let clientMessage = mes.toString()
+                clientMessage = JSON.parse(clientMessage)
+                let link = '/dentistimo/' + clientMessage.id
+                client.publish(link, JSON.stringify(clientMessage), { qos: 1 })
+                client.subscribe(link, { qos: 1 }, e => {
+                    client.on('message', (topic, message) => {
+                        try {
+                            if (JSON.parse(message).id === clientMessage.id && JSON.parse(message)["response"] === "response") {
+                                ws.send(message.toString())
+                                client.unsubscribe(topic)
+                            }
+                        } catch (e) {
+                            ws.send(JSON.stringify({ "Error": "Received bad data from the server." }))
+                            client.unsubscribe(topic)
+                        }
+                    })
+                })
+            } catch (e) {
+                ws.send(JSON.stringify({ "Error": "400 Bad Request. Requests must be sent as stringified Json." }))
+            }
+        })
+        count++
+    } else {
+        ws.send(JSON.stringify({ "Error": "429 Too Many Requests. Please try again later." }))
     }
-  })
-})
-client.on('message', (topic, payload) => {
-  console.log('Received Message:', topic, payload.toString())
 })
