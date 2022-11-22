@@ -13,6 +13,7 @@ console.log("connected")
 wss.on("connection", ws => {
     if (count < 10) {
         ws.on("message", mes => {
+            console.log('aaoo got something')
             try {
                 let clientMessage = mes.toString()
                 clientMessage = JSON.parse(clientMessage)
