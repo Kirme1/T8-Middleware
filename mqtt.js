@@ -18,7 +18,7 @@ wss.on("connection", ws => {
                 let clientMessage = mes.toString()
                 clientMessage = JSON.parse(clientMessage)
                 let link = ''
-                if(clientMessage.authenticated) {
+                if(clientMessage.authenticated === true) {
                     link = '/dentistimo/authenticated/' + clientMessage.id
                 } else if (clientMessage.authenticated === false){
                     link = '/dentistimo/unauthenticated/' + clientMessage.id 
