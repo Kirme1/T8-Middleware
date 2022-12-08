@@ -18,9 +18,9 @@ wss.on("connection", ws => {
                 let clientMessage = mes.toString()
                 clientMessage = JSON.parse(clientMessage)
                 let link = ''
-                if(clientMessage.request === 'login' || clientMessage.request === 'signUp') {
+                if(clientMessage.authenticated) {
                     link = '/dentistimo/authenticated/' + clientMessage.id
-                } else {
+                } else if (clientMessage.authenticated === false){
                     link = '/dentistimo/unauthenticated/' + clientMessage.id 
                 }
                 client.publish(link, JSON.stringify(clientMessage), { qos: 1 })
