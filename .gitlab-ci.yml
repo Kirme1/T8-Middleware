@@ -16,8 +16,7 @@ build:
     - docker
   script:
     - npm install
-    - npm start
-    - npm run build
+    - npm build
 
 test:
   stage: test
@@ -27,5 +26,7 @@ test:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
   script:
+      - gnome-terminal -- npm start
+      - gnome-terminal -- npm run build
       - cd test
       - npm test
