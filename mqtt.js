@@ -20,16 +20,28 @@ wss.on("connection", ws => {
                 let link = ''
                 if(clientMessage.authenticated === true) {
                     link = '/dentistimo/authenticated/' + clientMessage.id
+                    console.log(link)
                 } else if (clientMessage.authenticated === false){
                     link = '/dentistimo/unauthenticated/' + clientMessage.id 
                 }
+                console.log(clientMessage)
                 client.publish(link, JSON.stringify(clientMessage), { qos: 1 })
                 client.subscribe(link, { qos: 1 }, e => {
                     client.on('message', (topic, message) => {
                         try {
-                            if (JSON.parse(message).id === clientMessage.id && JSON.parse(message)["response"] === "response") {
-                                ws.send(message.toString())
-                                client.unsubscribe(topic)
+                            console.log('here-love1')
+                            console.log(JSON.parse(message))
+                            if (JSON.parse(message).id === clientMessage.id) {
+                                if(JSON.parse(message)["response"] === "response") {
+                                    console.log('here-love2')
+                                    ws.send(message.toString())
+                                    client.unsubscribe(topic)
+                                } else if(JSON.parse(message).authenticated) {
+                                    console.log('here-love3')
+                                    let link2 = '/dentistimo/authenticated/' + JSON.parse(message).id
+                                    client.publish(link2, message, { qos: 1 })
+                                    client.subscribe(link2, { qos: 1 })
+                                }
                             }
                         } catch (e) {
                             ws.send(JSON.stringify({ "Error": "Received bad data from the server." }))
