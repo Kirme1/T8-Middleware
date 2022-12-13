@@ -16,7 +16,8 @@ build:
     - docker
   script:
     - npm install
-    - npm build
+    - npm start
+    - npm run build
 
 test:
   stage: test
