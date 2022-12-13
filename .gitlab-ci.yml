@@ -16,7 +16,7 @@ build:
     - docker
   script:
     - npm install
-    - node mqtt.js
+    - npm build
 
 test:
   stage: test
@@ -28,5 +28,6 @@ test:
   script:
       - cd test
       - node testInterpreter.js
+      - node mqtt.js
       - npm i mocha -g
       - npm test --timeout 10000 --exit
