@@ -26,8 +26,6 @@ test:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
   script:
-      - cd test
-      - node testInterpreter.js
-      - node mqtt.js
       - npm i mocha -g
+      - cd test
       - npm test --timeout 10000 --exit
