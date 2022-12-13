@@ -7,7 +7,15 @@ describe('MQTT', function () {
 
             const result = mqtest()
             setTimeout(() => {
-                assert.equal(result[0].data, "hello")
+                let resultString = ''
+                let expectedResult = 'hello'
+                try {
+                    resultString = result[0].data
+                } catch (e) {
+                    console.log(e)
+                }
+
+                assert.equal(resultString, expectedResult)
             }, 100)
 
             function mqtest() {
