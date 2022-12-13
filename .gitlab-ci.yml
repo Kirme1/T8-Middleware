@@ -26,6 +26,6 @@ test:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
   script:
-      - npm run build ; npm start
+      - node test/testInterpreter.js ; npm start
       - cd test
       - npm test
