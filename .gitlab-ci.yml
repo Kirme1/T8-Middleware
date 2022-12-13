@@ -18,7 +18,7 @@ build:
     - npm install
     - npm build
 
-test:
+test1:
   stage: test
   tags:
     - docker
@@ -26,6 +26,25 @@ test:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
   script:
-      - node test/testInterpreter.js ; npm start
+      - node test/testInterpreter.js 
+
+test2:
+  stage: test
+  tags:
+    - docker
+  services:
+    - name: mvertes/alpine-mongo:latest
+      alias: mongo
+  script:
+      - node mqtt.js 
+
+test3:
+  stage: test
+  tags:
+    - docker
+  services:
+    - name: mvertes/alpine-mongo:latest
+      alias: mongo
+  script:
       - cd test
       - npm test
