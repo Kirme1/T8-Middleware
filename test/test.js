@@ -3,15 +3,11 @@ const WebSocket = require("ws")
 var assert = require('assert');
 describe('MQTT', function () {
     describe('#send()', function () {
-        it('should return hello if mqtt and WebSocket is working', function (done) {
+        it('should return hello if mqtt and WebSocket is working', function () {
 
             const result = mqtest()
             setTimeout(() => {
-                if(result[0].data === 'hello') {
-                    done()
-                } else {
-                    done(null)
-                }
+                assert.equal(result[0].data === "hello")
             }, 100)
 
             function mqtest() {
