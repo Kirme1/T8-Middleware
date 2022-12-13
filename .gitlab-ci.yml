@@ -26,7 +26,6 @@ test:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
   script:
-      - gnome-terminal -- npm start
-      - gnome-terminal -- npm run build
+      - npm run build ; npm start
       - cd test
       - npm test
