@@ -27,4 +27,4 @@ test:
       alias: mongo
   script:
       - cd test
-      - npm test --timeout 10000 --exit
+      - npm test
