@@ -46,5 +46,6 @@ test3:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
   script:
+      - npm i -g mocha
       - cd test
       - npm test
