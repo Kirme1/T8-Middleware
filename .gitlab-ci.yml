@@ -45,6 +45,8 @@ test3:
   services:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
+    - variables:
+      port: 8082
   script:
       - npm i -g mocha
       - npm i -g websocket
