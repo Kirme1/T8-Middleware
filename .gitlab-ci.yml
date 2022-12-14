@@ -29,7 +29,7 @@ test:
     WebSocket: "ws://localhost:8082"
   script: 
       - npm i -g mocha
-      - screen
+      - yum install screen
       - invoke-expression 'cmd /c start powershell -NoExit -Command {node mqtt.js}'
       - start powershell {node testInterpreter.js}
       - cd test
