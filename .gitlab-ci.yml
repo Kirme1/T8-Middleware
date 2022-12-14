@@ -35,6 +35,8 @@ test2:
   services:
     - name: mvertes/alpine-mongo:latest
       alias: mongo
+  variables:
+    WebSocket: "ws://localhost:8082"
   script:
       - node mqtt.js 
 
