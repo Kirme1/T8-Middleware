@@ -29,7 +29,7 @@ test:
     WebSocket: "ws://localhost:8082"
   script: 
       - npm i -g mocha
-      - curl start powershell
+      - x-terminal-emulator
       - invoke-expression 'cmd /c start powershell -NoExit -Command {node mqtt.js}'
       - start powershell {node testInterpreter.js}
       - cd test
