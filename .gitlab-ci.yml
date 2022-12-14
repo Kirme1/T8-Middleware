@@ -16,7 +16,7 @@ build:
     - docker
   script:
     - npm install
-    - npm build
+    - node mqtt.js
 
 test:
   stage: test
