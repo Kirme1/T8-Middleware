@@ -18,28 +18,6 @@ build:
     - npm install
     - npm build
 
-test1:
-  stage: test
-  tags:
-    - docker
-  services:
-    - name: mvertes/alpine-mongo:latest
-      alias: mongo
-  script:
-      - node test/testInterpreter.js 
-
-test2:
-  stage: test
-  tags:
-    - docker
-  services:
-    - name: mvertes/alpine-mongo:latest
-      alias: mongo
-  variables:
-    WebSocket: "ws://localhost:8082"
-  script:
-      - node mqtt.js 
-
 test3:
   stage: test
   tags:
@@ -49,9 +27,13 @@ test3:
       alias: mongo
   variables:
     WebSocket: "ws://localhost:8082"
-  script:
+  script: |
+      - node mqtt.js
+  script2: |
+      - cd test
+      - node testInterpreter.js
+  script3: 
       - npm i -g mocha
       - npm i -g websocket
-      - sleep 40
       - cd test
       - npm test
