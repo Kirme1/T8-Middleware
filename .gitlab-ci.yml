@@ -18,7 +18,7 @@ build:
     - npm install
     - npm build
 
-test3:
+test:
   stage: test
   tags:
     - docker
@@ -27,13 +27,11 @@ test3:
       alias: mongo
   variables:
     WebSocket: "ws://localhost:8082"
-  script: |
-      - node mqtt.js
-  script2: |
-      - cd test
-      - node testInterpreter.js
-  script3: 
+  script: 
       - npm i -g mocha
       - npm i -g websocket
-      - cd test
-      - npm test
+      - |
+        node mqtt.js
+        cd test
+        node testInterpreter.js
+        npm test
