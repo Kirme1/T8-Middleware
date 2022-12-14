@@ -47,6 +47,7 @@ test3:
       alias: mongo
   script:
       - npm i -g mocha
-      - sleep 20
+      - npm i -g websocket
+      - sleep 40
       - cd test
       - npm test
