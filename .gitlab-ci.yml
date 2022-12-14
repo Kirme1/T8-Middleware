@@ -29,7 +29,6 @@ test:
     WebSocket: "ws://localhost:8082"
   script: 
       - npm i -g mocha
-      - npm i -g websocket
       - |
         node mqtt.js
         cd test
