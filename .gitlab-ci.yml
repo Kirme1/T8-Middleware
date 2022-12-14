@@ -16,7 +16,7 @@ build:
     - docker
   script:
     - npm install
-    - node mqtt.js
+    - npm build
 
 test:
   stage: test
@@ -29,8 +29,7 @@ test:
     WebSocket: "ws://localhost:8082"
   script: 
       - npm i -g mocha
-      - |
-        node mqtt.js
-        cd test
-        node testInterpreter.js
-        npm test
+      - start powershell {node mqtt.js}
+      - start powershell {node testInterpreter.js}
+      - cd test
+      - npm test
