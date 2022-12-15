@@ -8,7 +8,6 @@ cache:
 
 stages:
   - build
-  - test
 
 build:
   stage: build
@@ -17,20 +16,3 @@ build:
   script:
     - npm install
     - npm build
-
-test:
-  stage: test
-  tags:
-    - docker
-  services:
-    - name: mvertes/alpine-mongo:latest
-      alias: mongo
-  variables:
-    WebSocket: "ws://localhost:8082"
-  script: 
-      - npm i -g mocha
-      - yum install screen
-      - invoke-expression 'cmd /c start powershell -NoExit -Command {node mqtt.js}'
-      - start powershell {node testInterpreter.js}
-      - cd test
-      - npm test
