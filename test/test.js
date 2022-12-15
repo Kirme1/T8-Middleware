@@ -1,4 +1,5 @@
 const WebSocket = require("ws")
+const mqtt = require('../mqtt')
 
 var assert = require('assert');
 describe('MQTT', function () {
