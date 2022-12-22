@@ -98,8 +98,11 @@ In order to run the component you need to have the project on your computer, nod
  
 - open the [CMD](https://www.lifewire.com/command-prompt-2625840) and go to the directory where you put the files. This can be done by typing cd + the file path. If I put my files in C:\Users\name\Desktop\t8-project-main I would type:
   >cd C:\Users\name\Desktop\t8-project-main
+
+- Type:
+  >npm install
  
-- The last step is to run the command
+- Once all dependencies have been installed, type the command
   >npm start
  
 If everything is installed correctly and running as it should you should see something like this
