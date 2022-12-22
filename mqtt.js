@@ -9,7 +9,13 @@ setInterval(() => {
     count = 0
 }, 1000);
 console.log("connected")
-
+// This the code of mqtt that makes it possbile for other components to publish, subscribe and unsubscribe to a message.
+// This receives the message from client, converts it to string and then to a json object.
+// If the client has been authenticated in the security component, the "/authenticated" will be added
+// to the basic url otherwire "unauthenticated" is added to the url. 
+// The message can then be published and subscribed based on the topic.
+// Also components can unsubscribe from a specific topic
+// all the errors are handled to prevent the middleware from crashing.
 wss.on("connection", ws => {
     if (count < 10) {
         ws.on("message", mes => {
